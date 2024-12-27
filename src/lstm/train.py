@@ -63,5 +63,18 @@ def train(**kwargs):
     t.save(model.state_dict(), './checkpoints/model_poet_2.pth')
 
 
+def test():
+    datasets = PoetryDataset(data_root)
+    data, ix2word, word2ix = datasets.getData()
+    modle = Net(len(word2ix), 128, 256)  # 模型定义：vocab_size, embedding_dim, hidden_dim —— 8293 * 128 * 256
+    if t.cuda.is_available() == True:
+        modle.cuda()
+        modle.load_state_dict(t.load('./checkpoints/model_poet_2.pth'))
+        modle.eval()
+        name = input("请输入您的开头：")
+        txt = generate(modle, name, ix2word, word2ix)
+        print(txt)
+
+
 if __name__ == "__main__":
     train()
