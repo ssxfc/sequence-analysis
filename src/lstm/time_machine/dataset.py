@@ -34,6 +34,7 @@ def seq_data_iter_sequential(corpus, batch_size, num_steps):
         X = Xs[:, i : i + num_steps]
         Y = Ys[:, i : i + num_steps]
         yield torch.tensor(X), torch.tensor(Y)
+        print(i)
 
 
 def get_train_data(txt):

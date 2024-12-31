@@ -3,7 +3,7 @@ import torch as t
 from lstm.poet.poetry import PoetryDataset
 from lstm.poet.model import Net
 num_epochs=5
-data_root=r"D:\datasets\poetry.npz"
+data_root=r"home/dcd/zww/data/poetry.npz"
 batch_size=10
 
 

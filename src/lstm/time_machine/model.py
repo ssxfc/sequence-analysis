@@ -16,7 +16,6 @@ class RNNModel(nn.Module):
 
     def forward(self, inputs, state):
         self.rnn.flatten_parameters()
-        
         X = F.one_hot(inputs.T.long(), self.vocab_size)
         X = X.to(torch.float32)
         Y, state = self.rnn(X, state)
