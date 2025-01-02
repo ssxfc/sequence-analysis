@@ -1,6 +1,5 @@
 **/tmp
 **/*.pth
-data
 .idea
 **/logs
 **/*.ipynb
