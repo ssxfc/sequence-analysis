@@ -27,4 +27,4 @@ class RNNModel(nn.Module):
             return torch.zeros((self.rnn.num_layers, batch_size, self.num_hiddens), device=device)
         else:
             return (torch.zeros(self.rnn.num_layers, batch_size, self.num_hiddens, device=device),
-                    torch.zeros((self.rnn.num_layers, batch_size, self.num_hiddens), device=device))
+                    torch.zeros(self.rnn.num_layers, batch_size, self.num_hiddens, device=device))
