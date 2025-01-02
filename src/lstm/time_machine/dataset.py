@@ -36,18 +36,13 @@ def seq_data_iter_sequential(corpus, batch_size, num_steps):
         X = Xs[:, i : i + num_steps]
         Y = Ys[:, i : i + num_steps]
         yield torch.tensor(X), torch.tensor(Y)
-        print(i)
 
 
 def get_train_data(txt):
-    if not os.path.exists("data/labels.txt"):
-        idx_to_tokens = ["<unk>"] + sorted([char for char in set(txt.lower())])
-        with open("data/labels.txt", "w") as f:
-            for char in idx_to_tokens:
-                f.write(char + "\n")
-    else:
-        with open("data/labels.txt", "r") as f:
-            idx_to_tokens = [item.replace("\n", "").replace("\r", "") for item in f.readlines()]
+    r"""labels.txt文件生成参见utils.py-->generate_label()
+    """
+    with open("data/labels.txt", "r") as f:
+        idx_to_tokens = [item.replace("\n", "").replace("\r", "") for item in f.readlines()]
     tokens_to_idx = {token: idx for idx, token in enumerate(idx_to_tokens)}
     corpus = [tokens_to_idx[token] for token in txt.lower()]
     return corpus, tokens_to_idx, idx_to_tokens
