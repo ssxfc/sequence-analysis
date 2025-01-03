@@ -10,7 +10,7 @@ import model
 from val import val
 
 
-def train(net:nn.Module, data_iter, val_iter, device, num_epochs, lr):
+def train(net, data_iter, val_iter, device, num_epochs, lr):
     net = net.to(device)
     loss = nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(net.parameters(), lr=lr)
@@ -65,12 +65,12 @@ def train(net:nn.Module, data_iter, val_iter, device, num_epochs, lr):
 if __name__ == "__main__":
     utils.set_seed(37)
     args = {
-        "num_epochs": 100,
-        "batch_size": 3,
+        "num_epochs": 20,
+        "batch_size": 4,
         "lr": 0.0001,
         "num_steps": 20,
-        "num_hiddens": 4096,
-        "num_layers": 2,
+        "num_hiddens": 128,
+        "num_layers": 1,
     }
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     with open(r"/home/dcd/zww/repos/sequence-analysis/data/train.txt", "r", encoding="utf-8") as f:
