@@ -42,7 +42,7 @@ def get_train_data(txt):
     r"""labels.txt文件生成参见utils.py-->generate_label()
     """
     with open("data/labels.txt", "r") as f:
-        idx_to_tokens = [item.replace("\n", "").replace("\r", "") for item in f.readlines()]
+        idx_to_tokens = ['<unk>'] + [item.replace("\n", "").replace("\r", "") for item in f.readlines()]
     tokens_to_idx = {token: idx for idx, token in enumerate(idx_to_tokens)}
     corpus = [tokens_to_idx[token] for token in txt.lower()]
     return corpus, tokens_to_idx, idx_to_tokens

@@ -11,3 +11,4 @@
 LICENSE text eol=lf
 README.md text eol=lf
 *.json text eol=lf
+*.txt text eol=lf

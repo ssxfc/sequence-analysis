@@ -13,12 +13,15 @@ class RNNModel(nn.Module):
         self.vocab_size = vocab_size
         self.num_hiddens = self.rnn.hidden_size                                 
         self.linear = nn.Linear(self.num_hiddens, vocab_size)
+        self.dropout = nn.Dropout(0.1)
 
     def forward(self, inputs, state):
         self.rnn.flatten_parameters()
         X = F.one_hot(inputs.T.long(), self.vocab_size)
         X = X.to(torch.float32)
         Y, state = self.rnn(X, state)
+        # ramdomly drop out some neurons 
+        # Y = self.dropout(Y)
         output = self.linear(Y.reshape(-1, self.num_hiddens))
         return output, state
     

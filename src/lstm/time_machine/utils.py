@@ -37,6 +37,7 @@ def axis_plot(title, x: dict, y: dict, save=True):
         plt.savefig(os.path.join('tmp', f'{title.replace(" ", "_")}.png'))
     else:
         plt.show()
+    plt.close()
 
     
 def generate_label(fp):
@@ -46,7 +47,7 @@ def generate_label(fp):
     """
     with open(fp, "r", encoding="utf-8") as f:
         str_data = "".join(f.readlines()).replace("\n", "").replace("\ufeff", "")
-    idx_to_tokens = ["<unk>"] + sorted([char for char in set(str_data.lower())])
+    idx_to_tokens = sorted([char for char in set(str_data.lower())])
     with open("data/labels.txt", "w") as f:
         for char in idx_to_tokens:
             f.write(char + "\n")
