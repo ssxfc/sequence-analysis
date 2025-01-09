@@ -3,7 +3,6 @@ import torch.utils
 
 from torch import nn
 
-import utils
 import model
 import dataset
 
@@ -18,6 +17,7 @@ def val(net:nn.Module, val_iter, device):
     total_loss = 0.0
     true_pred = 0
     total = 0
+    num_batch = 0
     with torch.no_grad():
         for x, y in val_iter:
             x, y = x.to(device), y.to(device)
@@ -38,7 +38,8 @@ def val(net:nn.Module, val_iter, device):
             total_loss += l.detach().cpu().item()
             true_pred += (pred_y == y).sum().item()
             total += y.size(0)
-        return total_loss, true_pred * 1.0 / total
+            num_batch += 1
+        return total_loss / num_batch, true_pred * 1.0 / total
 
 
 if __name__ == "__main__":

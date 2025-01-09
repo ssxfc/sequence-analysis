@@ -11,7 +11,7 @@ class RNNModel(nn.Module):
         super().__init__()
         self.rnn = rnn
         self.vocab_size = vocab_size
-        self.num_hiddens = self.rnn.hidden_size                                 
+        self.num_hiddens = self.rnn.hidden_size
         self.linear = nn.Linear(self.num_hiddens, vocab_size)
         self.dropout = nn.Dropout(0.1)
 
@@ -26,7 +26,7 @@ class RNNModel(nn.Module):
         return output, state
     
     def begin_state(self, device, batch_size):
-        if isinstance(self.rnn, nn.RNN):
+        if isinstance(self.rnn, nn.RNN) or isinstance(self.rnn, nn.GRU):
             return torch.zeros((self.rnn.num_layers, batch_size, self.num_hiddens), device=device)
         else:
             return (torch.zeros(self.rnn.num_layers, batch_size, self.num_hiddens, device=device),

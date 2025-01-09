@@ -5,6 +5,7 @@ import torch
 import numpy as np
 
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 
 def set_seed(seed=42):
@@ -28,11 +29,9 @@ def axis_plot(title, x: dict, y: dict, save=True):
     axis.set_title(title)
     axis.set_xlabel(x['name'])
     axis.set_ylabel(y['name'])
+    axis.axis([0, max(x['list']), 0, max(y['list'])])
+    axis.xaxis.set_major_locator(ticker.MaxNLocator(integer=True))
     axis.plot(x['list'], y['list'])
-    # 重新计算坐标轴范围限制
-    axis.relim()
-    # 根据新的范围更新视图
-    axis.autoscale_view()
     if save:
         plt.savefig(os.path.join('tmp', f'{title.replace(" ", "_")}.png'))
     else:
